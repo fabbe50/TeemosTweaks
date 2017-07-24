@@ -1,0 +1,16 @@
+[
+{
+  "modid": "ttweaks",
+  "name": "Teemo's Tweaks",
+  "description": "Tweaks Minecraft the way I want it.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["fabbe50"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

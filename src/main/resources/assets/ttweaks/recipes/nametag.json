@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:leather",
+      "data": 0
+    },
+    {
+      "item": "minecraft:paper",
+      "data": 0
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 0
+    },
+    {
+      "item": "minecraft:string",
+      "data": 0
+    },
+    {
+      "item": "minecraft:slime_ball",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "minecraft:name_tag",
+    "count": 1
+  }
+}
