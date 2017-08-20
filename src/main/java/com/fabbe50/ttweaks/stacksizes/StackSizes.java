@@ -2,8 +2,10 @@ package com.fabbe50.ttweaks.stacksizes;
 
 import com.fabbe50.ttweaks.LogHelper;
 import net.minecraft.block.BlockTallGrass;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -14,10 +16,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by fabbe on 09/07/2017.
  */
 public class StackSizes {
+    private static List<Item> items = new ArrayList<>();
+
     public static void init() {
         if (!Loader.isModLoaded("quark")) {
             Items.MINECART.setMaxStackSize(16);
@@ -26,6 +33,13 @@ public class StackSizes {
             Items.HOPPER_MINECART.setMaxStackSize(16);
             Items.TNT_MINECART.setMaxStackSize(16);
             Items.COMMAND_BLOCK_MINECART.setMaxStackSize(16);
+
+            items.add(Items.MINECART);
+            items.add(Items.CHEST_MINECART);
+            items.add(Items.FURNACE_MINECART);
+            items.add(Items.HOPPER_MINECART);
+            items.add(Items.TNT_MINECART);
+            items.add(Items.COMMAND_BLOCK_MINECART);
         } else {LogHelper.info("Found 'Quark', disabling similar features.");}
 
         Items.BOAT.setMaxStackSize(16);
@@ -42,30 +56,40 @@ public class StackSizes {
         Items.TOTEM_OF_UNDYING.setMaxStackSize(16);
         Items.CAKE.setMaxStackSize(16);
 
-        //Items.POTIONITEM.setMaxStackSize(16);
-        //Items.SPLASH_POTION.setMaxStackSize(16);
-        //Items.LINGERING_POTION.setMaxStackSize(16);
-        //Items.BEETROOT_SOUP.setMaxStackSize(16);
-        //Items.MUSHROOM_STEW.setMaxStackSize(16);
-        //Items.RABBIT_STEW.setMaxStackSize(16);
-
         Items.BUCKET.setMaxStackSize(64);
         Items.WATER_BUCKET.setMaxStackSize(16);
         Items.LAVA_BUCKET.setMaxStackSize(16);
 
-        //Items.MILK_BUCKET.setMaxStackSize(16);
-
-        //Tooltips
-        //items.add(Items.BREWING_STAND);
+        items.add(Items.BOAT);
+        items.add(Items.BIRCH_BOAT);
+        items.add(Items.ACACIA_BOAT);
+        items.add(Items.DARK_OAK_BOAT);
+        items.add(Items.JUNGLE_BOAT);
+        items.add(Items.SPRUCE_BOAT);
+        items.add(Items.SADDLE);
+        items.add(Items.ENDER_PEARL);
+        items.add(Items.SNOWBALL);
+        items.add(Items.EGG);
+        items.add(Items.ENCHANTED_BOOK);
+        items.add(Items.TOTEM_OF_UNDYING);
+        items.add(Items.CAKE);
+        items.add(Items.BUCKET);
+        items.add(Items.WATER_BUCKET);
+        items.add(Items.LAVA_BUCKET);
     }
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent(priority = EventPriority.HIGH)
     public void applyTooltips(ItemTooltipEvent event) {
-        if (event.getItemStack().getItem() == Items.MILK_BUCKET && false) {
-            event.getToolTip().add("Who even drinks a cubic meter of milk?");
-            event.getToolTip().add("Pour it into bottles first!");
+        if (GuiScreen.isShiftKeyDown()) {
+            if (items.contains(event.getItemStack().getItem())) {
+                addTooltip(event);
+            }
         }
+    }
+
+    private void addTooltip(ItemTooltipEvent event) {
+        event.getToolTip().add("Changes made by Teemo's Tweaks");
     }
 
     @SubscribeEvent
